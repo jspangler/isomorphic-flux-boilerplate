@@ -90,7 +90,7 @@
     "karma-mocha": "^0.2.0",
     "karma-webpack": "^1.7.0",
     "koa-webpack-dev-middleware": "^1.0.1",
-    "koa-webpack-hot-middleware": "^1.0.1",
+    "koa-webpack-hot-middleware": "^1.0.3",
     "mocha": "^2.3.4",
     "node-watch": "^0.3.4",
     "react-addons-test-utils": "^0.14.0",
