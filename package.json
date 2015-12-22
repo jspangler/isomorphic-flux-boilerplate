@@ -1,7 +1,7 @@
 {
-  "name": "isomorphic-flux-boilerplate",
-  "version": "0.4.0",
-  "description": "An ES7 isomorphic Flux/ReactJS boilerplate",
+  "name": "gigaphone",
+  "version": "1.0.0",
+  "description": "",
   "main": "server/index.js",
   "scripts": {
     "build": "rm -rf dist && babel-node ./node_modules/.bin/webpack --stats --config ./webpack/prod.config.js",
@@ -12,11 +12,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/iam4x/isomorphic-flux-boilerplate.git"
+    "url": "https://github.com/bellhops/gigaphone.git"
   },
-  "homepage": "https://github.com/iam4x/isomorphic-flux-boilerplate",
-  "bugs": "https://github.com/iam4x/isomorphic-flux-boilerplate/issues",
-  "author": "iam4x",
+  "homepage": "https://getbellhops.com/",
+  "author": "bellhops",
   "license": "MIT",
   "dependencies": {
     "alt": "^0.18.1",
