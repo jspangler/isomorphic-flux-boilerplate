@@ -28,6 +28,10 @@ export default function (flux) { /* eslint react/display-name: 0 */
         paths: [ '/login', '/connexion' ],
         component: require('./pages/login').default
       }) }
+      { generateRoute({
+        paths: [ '/become-a-bellhop' ],
+        component: require('./components/become-a-bellhop/BecomeBellhopView').default
+      }) }
       <Route path='*' component={ require('./pages/not-found').default } />
     </Route>
   );

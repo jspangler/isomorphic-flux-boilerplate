@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import { isArray } from 'lodash';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 import baseConfig from './base.config';
 import startKoa from './utils/start-koa';
@@ -45,17 +46,22 @@ export default {
         ...baseConfig.module.loaders,
         {
           test: /\.(jpe?g|png|gif|svg|woff|woff2|eot|ttf)(\?v=[0-9].[0-9].[0-9])?$/,
-          loader: 'file?name=[sha512:hash:base64:7].[ext]',
-          exclude: /node_modules\/(?!font-awesome)/
+          loader: 'file?name=[sha512:hash:base64:7].[ext]'
         },
         {
           test: /\.css$/,
-          loader: 'style!css?sourceMap!postcss',
-          exclude: /node_modules/
+          loader: ExtractTextPlugin.extract('style', 'css?sourceMap!postcss')
+        },
+        {
+          test: /\.scss$/,
+          loader: ExtractTextPlugin.extract('style', 'css?sourceMap!autoprefixer!sass?outputStyle=expanded&sourceMap=true')
         }
       ]
     },
     plugins: [
+      // extract css
+      new ExtractTextPlugin('[name]-[chunkhash].css'),
+
       // hot reload
       new webpack.optimize.OccurenceOrderPlugin(),
       new webpack.HotModuleReplacementPlugin(),

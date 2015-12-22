@@ -3,19 +3,14 @@ import connect from 'connect-alt';
 import { Link } from 'react-router';
 import { IntlMixin } from 'react-intl';
 
-import imageResolver from 'utils/image-resolver';
-import Spinner from 'components/shared/spinner';
-import LangPicker from 'components/shared/lang-picker';
+import { Header as BellhopsHeader } from 'stencil';
 
-// Load styles for the header
-// and load the `react-logo.png` image
-// for the `<img src='' />` element
-let reactLogo;
+import imageResolver from 'utils/image-resolver';
+let loaderFunc = imageResolver;
 if (process.env.BROWSER) {
-  reactLogo = require('images/react-logo.png');
-} else {
-  reactLogo = imageResolver('images/react-logo.png');
+  loaderFunc = require;
 }
+const reactLogo = loaderFunc('images/react-logo.png');
 
 @connect(({ requests: { inProgress }, session: { session } }) =>
   ({ inProgress, session }))
@@ -45,18 +40,8 @@ class Header extends Component {
   }
 
   render() {
-    const { inProgress, session } = this.props;
-    const { locales: [ activeLocale ] } = this.context;
-
     return (
-      <header className='app--header'>
-        {/* Spinner in the top right corner */}
-        <Spinner active={ inProgress } />
-
-        {/* LangPicker on the right side */}
-        <LangPicker
-          activeLocale={ activeLocale }
-          onChange={ ::this.handleLocaleChange } />
+      <BellhopsHeader>
 
         {/* React Logo in header */}
         <Link to='/' className='app--logo'>
@@ -75,27 +60,8 @@ class Header extends Component {
               { this.i18n('header.guides') }
             </Link>
           </li>
-          { session ?
-            [
-              <li key={ 0 }>
-                <Link to={ this.i18n('routes.account') }>
-                  { this.i18n('header.account') }
-                </Link>
-              </li>,
-              <li key={ 1 }>
-                <a href='#' onClick={ ::this.handleLogout }>
-                  { this.i18n('header.logout') }
-                </a>
-              </li>
-            ] :
-            <li>
-              <Link to={ this.i18n('routes.login') }>
-                { this.i18n('header.login') }
-              </Link>
-            </li>
-          }
         </ul>
-      </header>
+      </BellhopsHeader>
     );
   }
 }
